@@ -1,0 +1,113 @@
+Multilingual-Agentic-Document-Processor/
+│
+├── backend/
+│   ├── app/
+│   │   ├── api/
+│   │   ├── core/
+│   │   ├── db/
+│   │   ├── models/
+│   │   ├── schemas/
+│   │   ├── services/
+│   │   ├── agents/
+│   │   ├── rag/
+│   │   ├── utils/
+│   │   └── main.py
+│   ├── uploads/
+│   ├── data/
+│   ├── tests/
+│   ├── requirements.txt
+│   └── venv
+│
+├── frontend/
+│
+├── docs/
+│
+├── docker/
+│
+└── README.md
+
+app/
+│
+├── api/
+│   ├── __init__.py
+│   ├── router.py          ← Main router
+│   ├── health.py          ← Health APIs
+│   ├── auth.py            ← Login APIs
+│   ├── upload.py          ← Upload APIs
+│   └── document.py        ← Document APIs
+│
+├── core/
+│   ├── __init__.py
+│   ├── config.py          ← Project settings
+│   └── logging.py         ← Loguru configuration
+│
+├── db/
+│   ├── __init__.py
+│   ├── database.py
+│   └── base.py
+│
+├── models/
+├── schemas/
+├── services/
+├── agents/
+├── workflows/
+├── rag/
+├── utils/
+├── storage/
+│
+└── main.py
+
+backend/
+└── app/
+    ├── api/
+    ├── core/
+    |   │
+    |   ├── __init__.py
+    |   ├── config.py
+    |   ├── security.py
+    |   └── logging.py
+    ├── db/
+    |    │
+    |    ├── __init__.py
+    |    ├── base.py
+    |    ├── database.py
+    |    └── session.py
+    ├── exceptions/
+    ├── models/
+    |    │
+    |    ├── __init__.py
+    |    ├── user.py
+    |    ├── application.py
+    |    ├── document.py
+    |    ├── extracted_data.py
+    |    └── session.py
+    ├── schemas/
+    |    │
+    |    ├── __init__.py
+    |    ├── auth.py
+    |    ├── user.py
+    |    ├── application.py
+    |    ├── document.py
+    |    └── response.py
+    ├── services/
+    |    │
+    |    ├── __init__.py
+    |    ├── auth_service.py
+    |    ├── upload_service.py
+    |    ├── document_service.py
+    |    ├── extraction_service.py
+    |    └── application_service.py
+    ├── workflows/
+    ├── agents/
+    ├── ocr/
+    ├── parsers/
+    ├── validators/
+    ├── rag/
+    ├── repositories/ 
+    |    └── user_repository.py
+    ├── prompts/
+    ├── storage/
+    ├── state/ 
+    ├── utils/
+    ├── .env
+    └── main.py
