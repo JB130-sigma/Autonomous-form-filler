@@ -4,6 +4,7 @@ from app.db.database import engine
 # Import all models
 from app.models.user import User
 from app.models.document import Document
+from app.models.extracted_data import ExtractedData
 
 
 def init_db():

@@ -39,6 +39,8 @@ numpy
 
 pandas
 
+easyocr
+
 playwright
 
 rapidfuzz

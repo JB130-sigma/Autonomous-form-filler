@@ -5,6 +5,7 @@ from app.core.config import settings
 from app.core.logging import logger
 from app.db.__init__db import init_db
 from app.api.upload import router as upload_router
+from app.api.extraction import router as extraction_router
 app = FastAPI(
     title=settings.PROJECT_NAME,
     version=settings.PROJECT_VERSION,
@@ -12,6 +13,7 @@ app = FastAPI(
 
 app.include_router(auth_router)
 app.include_router(upload_router)
+app.include_router(extraction_router)
 
 @app.on_event("startup")
 def startup():
