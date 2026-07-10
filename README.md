@@ -32,7 +32,7 @@ The **Multilingual Agentic Document Processor** automates this workflow by:
 ## ✨ Features
 
 ### ✅ Authentication
-- User Registration
+    ✅ User Registration
 - User Login
 - JWT Authentication
 - Password Hashing (bcrypt)
