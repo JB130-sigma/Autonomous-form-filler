@@ -4,7 +4,11 @@ from sqlalchemy import DateTime, ForeignKey, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db.base import Base
-
+from sqlalchemy import Enum
+from app.enums import ProcessingStatus
+from app.enums import DocumentType
+from sqlalchemy import Float
+from sqlalchemy import Boolean
 
 class Document(Base):
     """
@@ -14,6 +18,12 @@ class Document(Base):
     """
 
     __tablename__ = "documents"
+    
+    is_form: Mapped[bool] = mapped_column(
+        Boolean,
+        default=False,
+        nullable=False
+    )
 
     id: Mapped[int] = mapped_column(
         Integer,
@@ -41,6 +51,11 @@ class Document(Base):
         String(500),
         nullable=False
     )
+    classification_confidence: Mapped[float] = mapped_column(
+        Float,
+        default=0.0,
+        nullable=False
+    )
 
     mime_type: Mapped[str] = mapped_column(
         String(100),
@@ -52,9 +67,19 @@ class Document(Base):
         nullable=False
     )
 
-    upload_status: Mapped[str] = mapped_column(
-        String(50),
-        default="uploaded"
+    #upload_status: Mapped[str] = mapped_column(
+    #    String(50),
+    #    default="uploaded"
+    #)
+    processing_status: Mapped[ProcessingStatus] = mapped_column(
+        Enum(ProcessingStatus),
+        default=ProcessingStatus.UPLOADED,
+        nullable=False
+    )
+    document_type: Mapped[DocumentType] = mapped_column(
+        Enum(DocumentType),
+        default=DocumentType.UNKNOWN,
+        nullable=False
     )
 
     created_at: Mapped[datetime] = mapped_column(

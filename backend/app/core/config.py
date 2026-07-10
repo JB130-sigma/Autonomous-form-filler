@@ -50,6 +50,24 @@ class Settings(BaseSettings):
     # Playwright
     # ==========================
     HEADLESS: bool
+    
+    # ==========================
+    # LLM Configuration
+    # ==========================
+
+    LLM_PROVIDER: str = "openrouter"
+
+    OPENROUTER_API_KEY: str = ""
+
+    GEMINI_API_KEY: str = ""
+
+    OLLAMA_BASE_URL: str = "http://localhost:11434"
+
+    OPENROUTER_MODEL: str = "google/gemini-2.5-flash"
+
+    GEMINI_MODEL: str = "gemini-2.5-flash"
+
+    OLLAMA_MODEL: str = "qwen2.5:7b"
 
     model_config = SettingsConfigDict(
         env_file=".env",

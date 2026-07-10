@@ -12,7 +12,10 @@ class DocumentResponse(BaseModel):
     original_filename: str
     mime_type: str
     file_size: int
-    upload_status: str
+    document_type: str
+    processing_status: str
+    classification_confidence: float
+    is_form: bool
     created_at: datetime
 
     model_config = ConfigDict(from_attributes=True)

@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from app.models.document import Document
 from app.repositories.document_repository import DocumentRepository
 from app.storage.file_storage import FileStorage
-
+from app.enums import DocumentType, ProcessingStatus
 
 class UploadService:
     """
@@ -37,8 +37,12 @@ class UploadService:
             file_path=file_path,
             mime_type=file.content_type,
             file_size=file.size if file.size else 0,
-            upload_status="uploaded",
-        )
+
+            document_type=DocumentType.UNKNOWN,
+            processing_status=ProcessingStatus.UPLOADED,
+            classification_confidence=0.0,
+            is_form=False,
+)
 
         # Save metadata
         return self.repository.create(document)
