@@ -207,7 +207,7 @@ http://127.0.0.1:8000/docs
 
 - ✅ Project Setup
 - ✅ Authentication Module
-- ✅Document Upload
+- ✅ Document Upload
 - ✅ OCR Integration
 - ⏳ Layout Detection
 - ⏳ Document Parsing
