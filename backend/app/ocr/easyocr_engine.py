@@ -1,5 +1,8 @@
 import fitz  # PyMuPDF
 import easyocr
+import numpy as np
+
+from PIL import Image
 
 from app.ocr.ocr_engine import OCREngine
 
@@ -10,8 +13,6 @@ class EasyOCREngine(OCREngine):
     """
 
     def __init__(self):
-        # English for now.
-        # Later we'll add multiple languages.
         self.reader = easyocr.Reader(
             ["en"],
             gpu=False
@@ -32,12 +33,25 @@ class EasyOCREngine(OCREngine):
         OCR for image files.
         """
 
-        results = self.reader.readtext(
-            image_path,
-            detail=0
-        )
+        try:
+            # Load image using Pillow
+            image = Image.open(image_path).convert("RGB")
 
-        return "\n".join(results)
+            # Convert to NumPy array
+            image_np = np.array(image)
+
+            # OCR
+            results = self.reader.readtext(
+                image_np,
+                detail=0
+            )
+
+            return "\n".join(results)
+
+        except Exception as e:
+            raise RuntimeError(
+                f"EasyOCR failed for image '{image_path}': {e}"
+            )
 
     def _extract_from_pdf(self, pdf_path: str) -> str:
         """
@@ -48,17 +62,15 @@ class EasyOCREngine(OCREngine):
 
         pdf = fitz.open(pdf_path)
 
-        for page in pdf:
+        for page_number, page in enumerate(pdf):
 
-            pix = page.get_pixmap()
+            pix = page.get_pixmap(dpi=300)
 
-            temp_image = "temp_page.png"
+            temp_image = f"temp_page_{page_number}.png"
 
             pix.save(temp_image)
 
-            page_text = self._extract_from_image(
-                temp_image
-            )
+            page_text = self._extract_from_image(temp_image)
 
             text += page_text + "\n"
 
