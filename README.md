@@ -1,153 +1,279 @@
-# Multilingual Agentic Document Processor
+# Agentic Form Filling System
 
-An AI-powered multilingual document processing system that automatically extracts, validates, and processes information from documents. The system uses OCR, AI agents, Retrieval-Augmented Generation (RAG), and browser automation to intelligently fill online forms with minimal human intervention.
+An AI-powered backend system that automatically understands application forms, identifies the required supporting documents, extracts information from uploaded documents, validates user data, and intelligently fills application forms.
 
----
-
-## 📖 Project Overview
-
-Many government, educational, banking, and enterprise workflows require users to manually enter information from documents into online forms. This process is repetitive, time-consuming, and prone to human error.
-
-The **Multilingual Agentic Document Processor** automates this workflow by:
-
-- Extracting text from multilingual documents
-- Understanding document structure using AI
-- Validating extracted information
-- Retrieving missing details through RAG
-- Automatically filling web forms using browser automation
+The project follows a modular **Agentic AI Architecture**, where specialized AI agents collaborate to automate the complete document processing and form filling workflow.
 
 ---
 
-## 🎯 Objectives
+# ✨ Features
 
-- Automate document processing
-- Support multilingual documents
-- Reduce manual data entry
-- Improve extraction accuracy
-- Enable intelligent decision-making using AI agents
-- Automatically fill online forms
-
----
-
-## ✨ Features
-
-### ✅ Authentication
-    ✅ User Registration
-- User Login
-- JWT Authentication
-- Password Hashing (bcrypt)
-
-### 🚧 Document Processing
-- PDF Upload
-- Image Upload
-- OCR using PaddleOCR
-- Layout Detection
-- Table Extraction
-- Handwritten Text Support (Planned)
-
-### 🚧 AI Processing
-- Document Classification
-- Intelligent Information Extraction
-- Field Validation
-- Confidence Scoring
-- Missing Data Detection
-
-### 🚧 RAG
-- Semantic Search
-- Context Retrieval
-- Vector Database (FAISS)
-- Sentence Transformers
-
-### 🚧 Agentic Workflow
-- LangGraph Agent Pipeline
-- Multi-Agent Decision Making
-- Document Verification
-- Validation Agent
-- Correction Agent
-
-### 🚧 Browser Automation
-- Automatic Form Filling
-- Playwright Integration
-- Multi-Step Form Support
-- Error Handling
+- 🔐 JWT Authentication
+- 📁 Application Management
+- 📤 Upload Images & PDF Documents
+- 🤖 AI Document Classification
+- 🪪 Identity Document Detection
+- 📄 Blank Form Detection
+- 📝 OCR Extraction
+- 📚 PDF OCR Support
+- 🗂 Required Document Identification
+- 🔄 Modular AI Agent Architecture
+- 🌐 Multilingual Ready
+- ⚡ OpenRouter LLM Integration
 
 ---
 
-## 🛠 Tech Stack
+# 🏗 Architecture
 
-### Backend
+```
+USER
+                      │
+                      ▼
+              Login/Register
+                      │
+                      ▼
+           Create Application
+                      │
+                      ▼
+          Upload Any Document
+                      │
+                      ▼
+      🤖 Document Classification Agent
+                      │
+      ┌───────────────┴───────────────┐
+      │                               │
+      ▼                               ▼
+Blank Form                     Identity Document
+      │                               │
+      ▼                               ▼
+🤖 Form Analyzer Agent          Store Document
+      │
+      ▼
+Required Fields
+      │
+      ▼
+🤖 Document Requirement Agent
+      │
+      ▼
+Ask User for Missing Documents
+      │
+      ▼
+User Uploads Remaining Documents
+      │
+      ▼
+🤖 OCR + Parser Agent
+      │
+      ▼
+🤖 Validation Agent
+      │
+      ▼
+🤖 Form Filling Agent
+      │
+      ▼
+Download / Submit
+```
+
+---
+
+# 🤖 AI Agents
+
+## 1. Document Classification Agent
+
+Analyzes uploaded documents using a Vision LLM.
+
+Responsibilities:
+
+- Detect document type
+- Detect blank forms
+- Identify identity documents
+- Categorize uploaded files
+- Estimate confidence
+- Identify required supporting documents
+
+Supported Documents:
+
+- Aadhaar Card
+- PAN Card
+- Passport
+- Driving Licence
+- Voter ID
+- Passport Application Form
+- Bank Account Opening Form
+- College Admission Form
+- Scholarship Form
+- Utility Bill
+- Bank Statement
+- Passport Photo
+- Signature
+- Blank Forms
+
+---
+
+## 2. Form Analyzer Agent
+
+Analyzes uploaded application forms.
+
+Responsibilities:
+
+- Detect form name
+- Understand document layout
+- Identify all input fields
+- Detect required fields
+- Determine field types
+- Prepare the form for intelligent filling
+
+---
+
+## 3. Document Requirement Agent
+
+Determines which supporting documents are required for a particular application form.
+
+Example:
+
+Passport Application →
+
+- Aadhaar
+- Passport Photo
+- Signature
+
+Bank Account Opening →
+
+- Aadhaar
+- PAN
+- Passport Photo
+- Signature
+
+---
+
+## 4. OCR + Parser Agent
+
+Extracts and structures information from uploaded documents.
+
+Current OCR Engine:
+
+- EasyOCR
+
+Future Support:
+
+- Gemini Vision OCR
+- Hybrid OCR Pipeline
+
+Responsibilities:
+
+- Extract printed text
+- OCR for PDF documents
+- OCR for Images
+- Parse extracted information into structured data
+
+---
+
+## 5. Validation Agent
+
+Validates extracted information before form filling.
+
+Responsibilities:
+
+- Required field validation
+- Missing document detection
+- Invalid field detection
+- Duplicate document checking
+- Confidence verification
+
+---
+
+## 6. Form Filling Agent
+
+Automatically fills application forms using validated information.
+
+Responsibilities:
+
+- Map extracted values
+- Auto-fill application forms
+- Preserve original formatting
+- Generate completed forms
+
+---
+
+# 🛠 Tech Stack
+
+## Backend
+
 - FastAPI
 - SQLAlchemy
-- SQLite
-- Alembic
 - Pydantic
+- JWT Authentication
 
-### AI & Machine Learning
-- LangChain
-- LangGraph
-- PaddleOCR
-- LayoutParser
-- Sentence Transformers
-- FAISS
+## AI & LLM
 
-### Image Processing
-- OpenCV
-- Pillow
-- NumPy
+- OpenRouter
+- Google Gemini 2.5 Flash
+- Agentic AI Workflow
 
-### Automation
-- Playwright
+## OCR
 
-### Utilities
-- Loguru
-- RapidFuzz
-- HTTPX
+- EasyOCR
+- PyMuPDF
+
+## Database
+
+- SQLite (Development)
+- PostgreSQL (Production Ready)
+
+## Storage
+
+- Local File Storage
 
 ---
 
-## 📂 Project Structure
+# 📂 Project Structure
 
-```text
-Multilingual-Agentic-Document-Processor/
+```
+backend/
 │
-├── backend/
-│   ├── app/
+├── app/
+│   ├── agents/
+│   ├── api/
+│   ├── core/
+│   ├── db/
+│   ├── enums/
+│   ├── llm/
+│   ├── models/
+│   ├── ocr/
+│   ├── prompts/
+│   ├── repositories/
+│   ├── schemas/
+│   ├── services/
 │   ├── uploads/
-│   ├── data/
-│   ├── tests/
-│   ├── requirements.txt
-│   └── .env.example
+│   └── main.py
 │
-├── frontend/
-├── docs/
-├── docker/
-├── README.md
-└── .gitignore
+├── tests/
+├── requirements.txt
+└── README.md
 ```
 
 ---
 
-## 🚀 Installation
+# 🚀 Installation
 
-### Clone Repository
-
-```bash
-git clone https://github.com/<your-username>/Multilingual-Agentic-Document-Processor.git
-```
-
-### Navigate
+Clone the repository
 
 ```bash
-cd Multilingual-Agentic-Document-Processor/backend
+git clone https://github.com/<your-username>/Multilingual-Agentic-Form-Filler.git
 ```
 
-### Create Virtual Environment
+Navigate to the backend
+
+```bash
+cd backend
+```
+
+Create virtual environment
 
 ```bash
 python -m venv venv
 ```
 
-### Activate
+Activate virtual environment
 
 Windows
 
@@ -155,47 +281,45 @@ Windows
 venv\Scripts\activate
 ```
 
-Linux/Mac
+Linux / macOS
 
 ```bash
 source venv/bin/activate
 ```
 
-### Install Dependencies
+Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### Create Environment File
+---
 
-Copy
+# ⚙ Environment Variables
 
-```text
-.env.example
+Create a `.env` file
+
+```env
+PROJECT_NAME=Multilingual Agentic Form Filling System
+
+OPENROUTER_API_KEY=your_api_key
+
+OPENROUTER_MODEL=google/gemini-2.5-flash
+
+DATABASE_URL=sqlite:///./app.db
+
+SECRET_KEY=your_secret_key
 ```
 
-to
+---
 
-```text
-.env
-```
-
-and configure the required environment variables.
-
-### Run Backend
+# ▶ Running the Server
 
 ```bash
 uvicorn app.main:app --reload
 ```
 
-Backend will be available at:
-
-```
-http://127.0.0.1:8000
-```
-
-Swagger Documentation:
+Swagger UI
 
 ```
 http://127.0.0.1:8000/docs
@@ -203,45 +327,45 @@ http://127.0.0.1:8000/docs
 
 ---
 
-## 📅 Development Roadmap
+# 📌 Current Capabilities
 
-- ✅ Project Setup
-- ✅ Authentication Module
-- ✅ Document Upload
-- ✅ OCR Integration
-- ⏳ Layout Detection
-- ⏳ Document Parsing
-- ⏳ RAG Pipeline
-- ⏳ Validation Engine
-- ⏳ LangGraph Workflow
-- ⏳ Playwright Form Filling
-- ⏳ Frontend Dashboard
-- ⏳ Docker Deployment
-
----
-
-## 📌 Current Status
-
-**Version:** 1.0.0
-
-Completed:
-- Project architecture
-- Database setup
-- Authentication system
-- JWT security
-- API documentation
-
-Currently Working On:
-- Document Upload Module
+- User Authentication
+- Application Creation
+- Image Upload
+- PDF Upload
+- Document Storage
+- AI Document Classification
+- Blank Form Detection
+- Identity Document Detection
+- OCR Text Extraction
+- PDF OCR Processing
+- Required Document Identification
+- Modular Agent-Based Backend
 
 ---
 
-## 👨‍💻 Contributors
+# 🔮 Future Enhancements
 
-- Jeet Bhandari
+- Gemini Vision OCR
+- Intelligent Form Understanding
+- Information Extraction Agent
+- Multi-language OCR
+- Automatic Form Filling
+- Filled PDF Generation
+- Digital Signature Support
+- Cloud Storage Integration
+- Human-in-the-loop Review
+- Frontend Dashboard
+- Deployment on Cloud
 
 ---
 
-## 📄 License
+# 🎯 Vision
 
-This project is developed for academic and research purposes as a Final Year Engineering Project.
+To build an intelligent multilingual AI platform capable of understanding documents, identifying required information, validating user data, and automatically completing government, banking, educational, and enterprise application forms using a collaborative multi-agent AI architecture.
+
+---
+
+# 📄 License
+
+This project is developed for educational and research purposes.
